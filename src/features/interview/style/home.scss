@@ -1,0 +1,960 @@
+// .home{
+//   width: 100%;
+//   min-height: 100vh;
+
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+
+
+//     .interview-input-group{
+//        display: flex;
+//        justify-items: center;
+//        align-items: center;
+//        gap: 2rem;
+//        min-width:  600px;
+//        min-height: 500px;
+      
+//     }
+//     .input-group:has(textarea){
+//       height: 100%;
+//     }
+
+//     textarea{
+//       height: 100%;
+//       border: none;
+//       outline:none;
+//       padding-inline:1rem;
+//       padding-block: 0.75rem;
+//       border-radius: 0.5rem;
+//       background-color: #3a3558;
+//       color:whitesmoke;
+//       font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+//       resize: none;
+
+//     }
+
+//     .left{
+      
+//       align-self: stretch;
+//       width: 50%;
+//       display: flex;
+//       flex-direction: column;
+//       gap: 1rem;
+  
+//     }
+//     .file-label{
+//       display: flex;
+//       padding: 0.75rem 1rem;
+//       background-color: white;
+//       color:black;
+//       border-radius: 0.5rem;
+//       cursor: pointer;
+//       font: 600;
+//       align-items: center;
+//       justify-content: center;
+      
+//     }
+
+
+//     .right{
+//        display: flex;
+//        flex-direction: column;
+//        gap: 1rem;
+//        width: 50%;
+//        justify-content: flex-start;
+//        align-self: stretch;
+
+
+
+
+//     }
+//   }
+
+
+
+
+/* InterviewPlanGenerator.scss */
+/* Exact match to your screenshot (dark desktop + responsive mobile) */
+
+$bg: #0f0c1a;
+$card-bg: #1a1628;
+$accent: #ff6a00;
+$text: #f5f5f5;
+$text-light: #a0a0a0;
+$border: #2e2a3f;
+$radius: 14px;
+
+.interview-plan-app {
+  background: $bg;
+  color: $text;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ====================== HEADERS ====================== */
+.desktop-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2.5rem;
+  background: #14101f;
+  border-bottom: 1px solid $border;
+
+  .logo {
+    font-size: 1.65rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    .logo-icon { color: $accent; }
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.25rem;
+    a {
+      color: $text-light;
+      text-decoration: none;
+      font-weight: 500;
+      &.active {
+        color: $accent;
+        position: relative;
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: -4px;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          background: $accent;
+        }
+      }
+    }
+  }
+
+  .header-right {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1.5rem;
+    
+    .icon-btn {
+      background: none;
+      border: none;
+      font-size: 1.6rem;
+      color: $text-light;
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 8px;
+      transition: background 0.2s;
+      
+      &:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+    }
+    
+    .profile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      
+      .profile-icon {
+        width: 40px;
+        height: 40px;
+        background: #3a3558;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3rem;
+        border: 1px solid $border;
+      }
+      
+      .profile-info {
+        .username {
+          margin: 0;
+          font-size: 0.73rem;
+          color: $text-light;
+          font-weight: 500;
+          white-space: nowrap;
+          text-align: center;
+          max-width: 70px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+  }
+}
+
+.mobile-header {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  background: #fff;
+  color: #111;
+  border-bottom: 1px solid #ddd;
+
+  .back-btn, .more-btn {
+    background: none;
+    border: none;
+    font-size: 1.6rem;
+  }
+  .mobile-title {
+    font-weight: 700;
+    font-size: 1.15rem;
+  }
+}
+
+/* ====================== MAIN CONTENT ====================== */
+.main {
+  flex: 1;
+  padding: 2rem 2.5rem;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.content-wrapper {
+  max-width: 1100px;
+}
+
+.plan-header {
+  margin-bottom: 2.5rem;
+
+  .plan-title {
+    font-size: 2rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    .title-icon { color: $accent; font-size: 2.2rem; }
+  }
+
+  .subtitle {
+    color: $text-light;
+    max-width: 720px;
+    line-height: 1.5;
+    margin: 12px 0 1.5rem;
+  }
+
+  .view-guides-btn {
+    background: transparent;
+    border: 2px solid $accent;
+    color: $accent;
+    padding: 10px 24px;
+    border-radius: $radius;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    &:hover { background: rgba(255,106,0,0.1); }
+  }
+}
+
+/* ====================== FORM GRID ====================== */
+.form-grid {
+  display: grid;
+  grid-template-columns: 2fr 1.6fr;
+  gap: 2rem;
+
+  .card {
+    background: $card-bg;
+    border-radius: $radius;
+    padding: 1.75rem;
+    border: 1px solid $border;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    .section-icon { font-size: 1.4rem; }
+  }
+
+  .input-textarea {
+    width: 100%;
+    background: #24203a;
+    border: 1px solid #3a3558;
+    border-radius: 10px;
+    padding: 1rem;
+    color: $text;
+    font-size: 1rem;
+    line-height: 1.6;
+    resize: none;
+    outline: none;
+    &::placeholder { color: $text-light; }
+  }
+
+  .recommendation {
+    margin-top: 8px;
+    font-size: 0.85rem;
+    color: $text-light;
+  }
+}
+
+/* Resume Card */
+.resume-card {
+  .upload-zone {
+    border: 2px dashed #4a445f;
+    border-radius: 12px;
+    padding: 3rem 1.5rem;
+    text-align: center;
+    transition: all 0.2s ease;
+    cursor: pointer;
+
+    &.dragging {
+      border-color: $accent;
+      background: rgba(255, 106, 0, 0.08);
+    }
+
+    .upload-label {
+      cursor: pointer;
+      .upload-icon {
+        font-size: 3.5rem;
+        color: $accent;
+        margin-bottom: 1rem;
+      }
+      p {
+        font-weight: 600;
+        font-size: 1.05rem;
+      }
+      small {
+        color: $text-light;
+        display: block;
+        margin-top: 4px;
+      }
+    }
+  }
+
+  .uploaded-file {
+    margin-top: 1.25rem;
+    background: #24203a;
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .file-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      .file-icon { font-size: 2.2rem; }
+      .file-name {
+        font-weight: 500;
+        font-size: 0.95rem;
+      }
+    }
+
+    .delete-btn {
+      background: none;
+      border: none;
+      font-size: 1.3rem;
+      color: #ff4d4d;
+      cursor: pointer;
+    }
+  }
+}
+
+/* Ready to Analyze Card */
+.ready-card {
+  .ready-header {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+  }
+  .ready-desc {
+    color: $text-light;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+  }
+  .features-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.75rem;
+    li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+      font-size: 0.98rem;
+      .check { color: $accent; font-size: 1.1rem; }
+    }
+  }
+  .generate-report-btn {
+    width: 100%;
+    background: $accent;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: background 0.2s;
+    &:hover { background: #ff8533; }
+  }
+}
+
+/* Pro Tip Card */
+.pro-tip-card {
+  background: #1f1b2e;
+  border: 1px solid #3a3558;
+  padding: 1.5rem;
+
+  .tip-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    color: $accent;
+    margin-bottom: 0.75rem;
+  }
+  p {
+    color: $text-light;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+}
+
+/* ====================== RESPONSIVE (Mobile View) ====================== */
+@media (max-width: 1024px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-modal-overlay {
+    .profile-modal {
+      padding: 2rem;
+
+      .profile-card {
+        gap: 1.5rem;
+
+        .profile-avatar {
+          width: 70px;
+          height: 70px;
+          font-size: 2rem;
+        }
+
+        .profile-details {
+          .profile-username {
+            font-size: 1.2rem;
+          }
+
+          .profile-email {
+            font-size: 0.9rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .desktop-header { display: none; }
+  .mobile-header { display: flex; }
+
+  .main {
+    padding: 1rem;
+  }
+
+  .plan-header {
+    .plan-title { font-size: 1.65rem; }
+  }
+
+  .profile-modal-overlay {
+    padding: 1rem;
+
+    .profile-modal {
+      width: 95%;
+      padding: 1.5rem;
+
+      .profile-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+        padding: 0;
+        background: none;
+        border: none;
+        box-shadow: none;
+
+        .profile-avatar {
+          width: 70px;
+          height: 70px;
+          font-size: 2rem;
+        }
+
+        .profile-details {
+          .profile-username {
+            font-size: 1.1rem;
+          }
+
+          .profile-email {
+            font-size: 0.85rem;
+          }
+
+          .profile-stats {
+            justify-content: center;
+            gap: 1.5rem;
+          }
+        }
+
+        .profile-action {
+          justify-content: center;
+        }
+      }
+    }
+  }
+
+  /* Mobile Bottom Nav - matches screenshot exactly */
+  .mobile-bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-top: 1px solid #e0e0e0;
+    box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
+    z-index: 100;
+    padding: 8px 0;
+
+    .nav-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      color: #666;
+      text-decoration: none;
+      font-size: 0.75rem;
+      padding: 4px 0;
+
+      span.label {
+        font-size: 0.68rem;
+        font-weight: 500;
+      }
+
+      &.active {
+        color: $accent;
+      }
+    }
+  }
+
+  .card {
+    padding: 1.25rem;
+  }
+}
+
+/* ====================== USER PROFILE MODAL ====================== */
+.profile-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.2s ease;
+
+  .profile-modal {
+    background: linear-gradient(135deg, $card-bg, #24203a);
+    border: 1px solid $border;
+    border-radius: 16px;
+    padding: 2.5rem;
+    position: relative;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    animation: slideUp 0.3s ease;
+
+    .modal-close-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(255, 106, 0, 0.2);
+      border: none;
+      color: $accent;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background: $accent;
+        color: white;
+      }
+    }
+
+    .profile-card {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      align-items: center;
+      text-align: center;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ====================== USER PROFILE CARD ====================== */
+.profile-card {
+  background: linear-gradient(135deg, $card-bg, #24203a);
+  border: 1px solid $border;
+  border-radius: 14px;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  max-width: 600px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: $accent;
+    box-shadow: 0 12px 40px rgba(255, 106, 0, 0.2);
+    transform: translateY(-2px);
+  }
+
+  .profile-avatar {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, $accent, #ff8533);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    flex-shrink: 0;
+    box-shadow: 0 4px 15px rgba(255, 106, 0, 0.3);
+  }
+
+  .profile-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .profile-username {
+      margin: 0;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: $text;
+    }
+
+    .profile-email {
+      margin: 0;
+      font-size: 0.95rem;
+      color: $text-light;
+    }
+
+    .profile-stats {
+      display: flex;
+      gap: 2rem;
+      margin-top: 0.75rem;
+
+      .stat {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        .stat-number {
+          font-size: 1.3rem;
+          font-weight: 700;
+          color: $accent;
+        }
+
+        .stat-label {
+          font-size: 0.8rem;
+          color: $text-light;
+          font-weight: 500;
+        }
+      }
+    }
+  }
+
+  .profile-action {
+    display: flex;
+    gap: 0.5rem;
+
+    .edit-profile-btn {
+      width: 44px;
+      height: 44px;
+      background: rgba(255, 106, 0, 0.2);
+      border: 1px solid $accent;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background: $accent;
+        transform: scale(1.05);
+      }
+    }
+  }
+}
+
+/* ====================== RECENT REPORTS SECTION ====================== */
+.recent-reports {
+  padding: 2.5rem 2.5rem;
+  background: #14101f;
+  border-top: 1px solid $border;
+
+  h2 {
+    margin: 0 0 1.5rem 0;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: $text;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    &::before {
+      content: '📊';
+      font-size: 1.5rem;
+    }
+  }
+
+  .recent-reports-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.25rem;
+
+    li {
+      margin: 0;
+
+      .report-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        background: $card-bg;
+        padding: 2rem 1.5rem;
+        border-radius: 10px;
+        border: 1px solid $border;
+        text-decoration: none;
+        color: $text;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        min-height: 140px;
+        position: relative;
+        overflow: hidden;
+        text-align: center;
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 3px;
+          background: linear-gradient(to right, $accent, transparent);
+        }
+
+        .report-title {
+          margin: 0;
+          font-size: 1.3rem;
+          font-weight: 700;
+          color: $accent;
+          line-height: 1.3;
+        }
+
+        .report-date {
+          font-size: 0.85rem;
+          color: $text-light;
+          white-space: nowrap;
+          padding: 6px 12px;
+          background: rgba(255, 106, 0, 0.15);
+          border-radius: 6px;
+          font-weight: 500;
+        }
+
+        &:hover {
+          background: #24203a;
+          border-color: $accent;
+          box-shadow: 0 8px 20px rgba(255, 106, 0, 0.15);
+          transform: translateY(-2px);
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .recent-reports {
+    padding: 2rem 2rem;
+
+    h2 {
+      font-size: 1.2rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .recent-reports-list {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .recent-reports {
+    padding: 1.5rem 1rem;
+
+    h2 {
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+
+    .recent-reports-list {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 0.75rem;
+
+      li .report-card {
+        padding: 1rem;
+        min-height: 120px;
+
+        .report-title {
+          font-size: 1.1rem;
+        }
+
+        .report-date {
+          font-size: 0.75rem;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .main { padding: 0.75rem; }
+
+  .profile-modal-overlay {
+    padding: 0.5rem;
+
+    .profile-modal {
+      width: 100%;
+      padding: 1.25rem;
+
+      .modal-close-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 1rem;
+      }
+
+      .profile-card {
+        gap: 0.75rem;
+
+        .profile-avatar {
+          width: 55px;
+          height: 55px;
+          font-size: 1.5rem;
+        }
+
+        .profile-details {
+          .profile-username {
+            font-size: 1rem;
+          }
+
+          .profile-email {
+            font-size: 0.8rem;
+          }
+
+          .profile-stats {
+            gap: 1rem;
+
+            .stat {
+              .stat-number {
+                font-size: 1.1rem;
+              }
+
+              .stat-label {
+                font-size: 0.75rem;
+              }
+            }
+          }
+        }
+
+        .profile-action {
+          .edit-profile-btn {
+            width: 40px;
+            height: 40px;
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+  }
+
+  .recent-reports {
+    padding: 1rem;
+
+    h2 {
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .recent-reports-list {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+
+      li .report-card {
+        padding: 1rem;
+        min-height: auto;
+
+        .report-title {
+          font-size: 1rem;
+        }
+
+        .report-date {
+          font-size: 0.7rem;
+        }
+      }
+    }
+  }
+}
