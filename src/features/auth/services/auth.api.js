@@ -55,11 +55,18 @@ export async function logout(){
 
 
 export const getMe = async () => {
-  const response = await axios.get(
-    "http://localhost:5000/api/auth/get-me",
-    {
-      withCredentials: true, // ✅ REQUIRED
+  try {
+    const response = await api.get("/get-me"); // ✅ endpoint
+
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching user:", error);
+
+    // Optional: better error handling
+    if (error.response?.status === 401) {
+      throw new Error("Unauthorized");
     }
-  );
-  return response.data;
+
+    throw error;
+  }
 };
