@@ -66,13 +66,21 @@ const handleLogout=async()=>{
 
 }
 
-const handleGetMe=async()=>{
+const handleGetMe = async () => {
   setLoading(true);
-  const data = await getMe();
-  setUser(data.user);
-  setLoading(false);
 
-}
+  try {
+    const data = await getMe();
+    setUser(data.user);
+  } catch (error) {
+    console.error("GetMe Error:", error);
+
+    // Optional: logout user if token invalid
+    setUser(null);
+  } finally {
+    setLoading(false);
+  }
+};
 
 useEffect(() => {
   const getAndSetUser = async () => {

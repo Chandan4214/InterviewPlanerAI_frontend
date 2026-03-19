@@ -52,14 +52,14 @@ export async function logout(){
 }
 
 
-export async function getMe(){
-  try{
-     const response = await api.get('/get-me')
-     return response.data
-  }
-  catch(error){
-  console.error("Error fetching user data:", error);
-  throw error;
-  }
 
-}
+
+export const getMe = async () => {
+  const response = await axios.get(
+    "http://localhost:5000/api/auth/get-me",
+    {
+      withCredentials: true, // ✅ REQUIRED
+    }
+  );
+  return response.data;
+};
